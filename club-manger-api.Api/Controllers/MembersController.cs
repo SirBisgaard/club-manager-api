@@ -9,12 +9,12 @@ namespace club_manger_api.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class MemberController : ControllerBase
+    public class MembersController : ControllerBase
     {
-        private readonly ILogger<MemberController> _logger;
+        private readonly ILogger<MembersController> _logger;
         private readonly IMemberService _memberService;
 
-        public MemberController(ILogger<MemberController> logger, IMemberService memberService)
+        public MembersController(ILogger<MembersController> logger, IMemberService memberService)
         {
             _logger = logger;
             _memberService = memberService;
