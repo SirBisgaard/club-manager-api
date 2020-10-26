@@ -45,15 +45,31 @@ namespace club_manger_api.DataAccess
 
         public async Task<Member> CreateMember(Member member)
         {
-            await Task.Delay(0);
+            _logger.LogDebug("Creating a new member.");
 
-            throw new System.NotImplementedException();
+            var members = (await GetAllMembers()).ToList();
+            member.Id = members.Max(m => m.Id) + 1;
+
+            _logger.LogDebug($"Next Id: {member.Id}.");
+
+            members.Add(member);
+
+            // serialize JSON directly to a file
+            using (StreamWriter file = File.CreateText(_filePath))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.Serialize(file, members);
+            }
+
+            _logger.LogDebug($"JSON is saved.");
+
+            return member;
         }
 
         public async Task<IEnumerable<Member>> GetAllMembers()
         {
             await Task.Delay(0);
-            
+
             _logger.LogDebug("Getting all members.");
 
             using (StreamReader file = File.OpenText(_filePath))
