@@ -1,9 +1,9 @@
 
+using System;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
 using club_manger_api.Domain;
-using System.Threading.Tasks;
-using System;
 using club_manger_api.DataAccess;
 
 namespace club_manger_api.Business
