@@ -34,17 +34,21 @@ namespace club_manger_api.Business
         public async Task<Member> GetMember(int id)
         {
             _logger.LogDebug($"Getting member with Id: {id}.");
-            
+
             return await _memberRepository.GetMember(id);
         }
 
         public async Task<Member> UpdateMember(Member member)
         {
+            _logger.LogDebug($"Udating member with Id: {member.Id}.");
+
             return await _memberRepository.UpdateMember(member);
         }
 
         public async Task<bool> DeleteMember(int id)
         {
+            _logger.LogDebug($"Deleting member with Id: {id}.");
+            
             return await _memberRepository.DeleteMember(id);
         }
     }

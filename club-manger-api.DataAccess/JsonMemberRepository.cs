@@ -1,12 +1,11 @@
-
-using System.Collections.Generic;
-using Microsoft.Extensions.Logging;
-using club_manger_api.Domain;
-using System.Threading.Tasks;
 using System;
 using System.Linq;
 using System.IO;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using club_manger_api.Domain;
 
 namespace club_manger_api.DataAccess
 {
@@ -53,7 +52,7 @@ namespace club_manger_api.DataAccess
             _logger.LogDebug($"Next Id: {member.Id}.");
 
             members.Add(member);
-            
+
             SaveMembers(members);
 
             return member;
@@ -84,9 +83,14 @@ namespace club_manger_api.DataAccess
             var members = (await GetAllMembers()).ToList();
 
             var index = members.FindIndex(m => m.Id == member.Id);
-            if(index == -1)
+            if (index == -1)
+            {
+                _logger.LogDebug($"Did not find member Id: {member.Id}.");
                 return null;
+            }
             members[index] = member;
+
+            _logger.LogDebug($"Member is updated.");
 
             SaveMembers(members);
 
@@ -98,6 +102,8 @@ namespace club_manger_api.DataAccess
             var members = await GetAllMembers();
 
             SaveMembers(members.Where(m => m.Id != id));
+
+            _logger.LogDebug($"Member is deleted.");
 
             return true;
         }
