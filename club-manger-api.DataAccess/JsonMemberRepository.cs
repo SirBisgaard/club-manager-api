@@ -53,15 +53,8 @@ namespace club_manger_api.DataAccess
             _logger.LogDebug($"Next Id: {member.Id}.");
 
             members.Add(member);
-
-            // serialize JSON directly to a file
-            using (StreamWriter file = File.CreateText(_filePath))
-            {
-                JsonSerializer serializer = new JsonSerializer();
-                serializer.Serialize(file, members);
-            }
-
-            _logger.LogDebug($"JSON is saved.");
+            
+            SaveMembers(members);
 
             return member;
         }
@@ -88,16 +81,37 @@ namespace club_manger_api.DataAccess
 
         public async Task<Member> UpdateMember(Member member)
         {
-            await Task.Delay(0);
+            var members = (await GetAllMembers()).ToList();
 
-            throw new System.NotImplementedException();
+            var index = members.FindIndex(m => m.Id == member.Id);
+            if(index == -1)
+                return null;
+            members[index] = member;
+
+            SaveMembers(members);
+
+            return member;
         }
 
         public async Task<bool> DeleteMember(int id)
         {
-            await Task.Delay(0);
+            var members = await GetAllMembers();
 
-            throw new System.NotImplementedException();
+            SaveMembers(members.Where(m => m.Id != id));
+
+            return true;
+        }
+
+        private void SaveMembers(IEnumerable<Member> members)
+        {
+            // serialize JSON directly to a file
+            using (StreamWriter file = File.CreateText(_filePath))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.Serialize(file, members);
+            }
+
+            _logger.LogDebug($"JSON is saved.");
         }
     }
 }
