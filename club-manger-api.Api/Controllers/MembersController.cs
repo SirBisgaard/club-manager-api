@@ -4,6 +4,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using club_manger_api.Business;
+using club_manger_api.Api.Models.Responses;
+using System.Linq;
+using club_manger_api.Api.Models.Requests;
+using club_manger_api.Domain;
 
 namespace club_manger_api.Api.Controllers
 {
@@ -25,7 +29,9 @@ namespace club_manger_api.Api.Controllers
         {
             _logger.LogDebug("Getting all members.");
 
-            return Ok(await _memberService.GetAllMembers());
+            var members = await _memberService.GetAllMembers();
+
+            return Ok(members.Select(MapToResponse));
         }
 
         [HttpGet]
@@ -43,7 +49,34 @@ namespace club_manger_api.Api.Controllers
                 return NotFound();
             }
 
-            return Ok(member);
+            return Ok(MapToResponse(member));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateMember([FromBody]CreateMemberRequest member)
+        {
+            _logger.LogDebug($"Creating new Member.");
+
+            return Ok(await _memberService.CreateMember(new Member{
+                Name = member.Name,
+                Mail = member.Mail,
+                Active = member.Active,
+                DateOfBirth = member.DateOfBirth,
+                FirstRegistered = member.FirstRegistered
+            }));
+        }
+
+        private static MemberResponse MapToResponse(Member member)
+        {
+            return new MemberResponse
+            {
+                Id = member.Id,
+                Name = member.Name,
+                Mail = member.Mail,
+                Active = member.Active,
+                DateOfBirth = member.DateOfBirth,
+                FirstRegistered = member.FirstRegistered
+            };
         }
     }
 }

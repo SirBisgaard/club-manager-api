@@ -7,7 +7,7 @@ namespace club_manger_api.DataAccess.DependencyInjection
     {
         public static IServiceCollection AddDataAccessDependencies(this IServiceCollection services)
         {
-            services.AddScoped<IMemberRepository, JsonMemberRepository>();
+            services.AddScoped<IMemberRepository, MemberRepository>();
 
             return services;
         }

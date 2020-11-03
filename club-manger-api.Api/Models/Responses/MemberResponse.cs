@@ -1,8 +1,8 @@
 using System;
 
-namespace club_manger_api.Domain
+namespace club_manger_api.Api.Models.Responses
 {
-    public class Member
+    public class MemberResponse
     {
         public int Id { get; set; }
         public string Name { get; set; }

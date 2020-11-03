@@ -8,7 +8,7 @@ using club_manger_api.DataAccess;
 
 namespace club_manger_api.Business
 {
-    public class MemberService : IMemberService
+    internal class MemberService : IMemberService
     {
         private readonly ILogger<MemberService> _logger;
         private readonly IMemberRepository _memberRepository;

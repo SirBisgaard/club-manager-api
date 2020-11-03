@@ -8,8 +8,8 @@ namespace club_manger_api.DataAccess
     {
         Task<IEnumerable<Member>> GetAllMembers();
         Task<Member> GetMember(int id);
-        Task<Member> UpdateMember(Member member);
         Task<Member> CreateMember(Member member);
+        Task<Member> UpdateMember(Member member);
         Task<bool> DeleteMember(int id);
     }
 }
