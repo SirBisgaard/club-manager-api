@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <ItemGroup>
+    <ProjectReference Include="..\ClubManagerApi.Domain\ClubManagerApi.Domain.csproj" />
+    <ProjectReference Include="..\ClubManagerApi.Business\ClubManagerApi.Business.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>ClubManagerApi.Api</RootNamespace>
+  </PropertyGroup>
+
+
+</Project>

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\ClubManagerApi.DataAccess\ClubManagerApi.DataAccess.csproj" />
+    <ProjectReference Include="..\ClubManagerApi.Domain\ClubManagerApi.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.9" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <RootNamespace>ClubManagerApi.Business</RootNamespace>
+  </PropertyGroup>
+
+</Project>
