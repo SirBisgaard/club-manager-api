@@ -1,4 +1,5 @@
 
+using System;
 using System.Data;
 using ClubManagerApi.Domain;
 using Microsoft.Data.Sqlite;
@@ -10,12 +11,13 @@ namespace ClubManagerApi.DataAccess.DependencyInjection
     {
         public static IServiceCollection AddDataAccessDependencies(this IServiceCollection services)
         {
-            services.AddScoped<IDbConnection, SqliteConnection>(s => {
-                var connection = new SqliteConnection(s.GetService<AppSettings>().ConnectionString);
+            services.AddScoped<IDbConnection, SqliteConnection>(s =>
+            {
+                var connection = new SqliteConnection($"Data Source={Environment.CurrentDirectory}{s.GetService<AppSettings>().DatabasePath}");
                 connection.Open();
                 return connection;
             });
-            
+
             services.AddScoped<IMemberRepository, MemberRepository>();
 
             return services;

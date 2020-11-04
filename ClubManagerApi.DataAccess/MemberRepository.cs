@@ -1,6 +1,5 @@
 using ClubManagerApi.Domain;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Dapper;
@@ -25,28 +24,43 @@ namespace ClubManagerApi.DataAccess
         {
             _logger.LogDebug($"Getting all members.");
 
-            return await _connection.QueryAsync<Member>("select * from Members");
+            return await _connection.QueryAsync<Member>(@"
+                SELECT 
+                    * 
+                FROM Members");
         }
 
         public async Task<Member> GetMember(int id)
         {
             _logger.LogDebug($"Getting member with Id: {id}.");
 
-            return await _connection.QuerySingleOrDefaultAsync<Member>("select * from Members where ID = @id", new
-            {
-                id
-            });
+            return await _connection.QuerySingleOrDefaultAsync<Member>(@"
+                SELECT 
+                    * 
+                FROM Members 
+                WHERE ID = @id",
+                new { id });
         }
 
         public async Task<Member> CreateMember(Member member)
         {
             _logger.LogDebug("Creating a new member.");
 
-            member.Id = (await _connection.QueryAsync<int>(
-                @"INSERT INTO Members 
-                    (Name, Mail, Active, DateOfBirth, FirstRegistered) VALUES 
-                    (@Name, @Mail, @Active, @DateOfBirth, @FirstRegistered);
-                    select last_insert_rowid()", member)).First();
+            member.Id = (await _connection.QueryAsync<int>(@"
+                INSERT INTO Members 
+                    (Name, 
+                    Mail, 
+                    Active, 
+                    DateOfBirth, 
+                    FirstRegistered) 
+                VALUES 
+                    (@Name, 
+                    @Mail, 
+                    @Active, 
+                    @DateOfBirth, 
+                    @FirstRegistered);
+                SELECT last_insert_rowid()",
+                member)).First();
 
             return member;
         }
@@ -55,14 +69,29 @@ namespace ClubManagerApi.DataAccess
         {
             _logger.LogDebug($"Updating member with Id: {member.Id}.");
 
-            throw new NotImplementedException();
+            await _connection.ExecuteAsync(@"
+                UPDATE Members 
+                SET 
+                    Name = @Name, 
+                    Mail = @Mail, 
+                    Active = @Active, 
+                    DateOfBirth = @DateOfBirth, 
+                    FirstRegistered = @FirstRegistered",
+                member);
+
+            return member;
         }
 
         public async Task<bool> DeleteMember(int id)
         {
             _logger.LogDebug($"Member is deleted.");
 
-            throw new NotImplementedException();
+            await _connection.ExecuteAsync(@"
+                DELETE FROM Members 
+                WHERE Id = @id",
+                new { id });
+
+            return true;
         }
     }
 }

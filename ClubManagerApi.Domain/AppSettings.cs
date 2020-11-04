@@ -2,6 +2,6 @@ namespace ClubManagerApi.Domain
 {
     public class AppSettings
     {
-        public string ConnectionString { get; set; }
+        public string DatabasePath { get; set; }
     }
 }

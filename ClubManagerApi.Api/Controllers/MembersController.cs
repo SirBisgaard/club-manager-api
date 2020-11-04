@@ -36,7 +36,7 @@ namespace ClubManagerApi.Api.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<IActionResult> GetMember(int id)
+        public async Task<IActionResult> GetMember([FromRoute] int id)
         {
             _logger.LogDebug($"Getting member with Id: {id}.");
 
@@ -53,17 +53,44 @@ namespace ClubManagerApi.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateMember([FromBody]CreateMemberRequest member)
+        public async Task<IActionResult> CreateMember([FromBody] CreateMemberRequest member)
         {
             _logger.LogDebug($"Creating new Member.");
 
-            return Ok(await _memberService.CreateMember(new Member{
+            return Ok(await _memberService.CreateMember(new Member
+            {
                 Name = member.Name,
                 Mail = member.Mail,
                 Active = member.Active,
                 DateOfBirth = member.DateOfBirth,
                 FirstRegistered = member.FirstRegistered
             }));
+        }
+
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult> UpdateMember([FromRoute] int id, [FromBody] UpdateMemberRequest member)
+        {
+            _logger.LogDebug($"Updating Member Id={id}.");
+
+            return Ok(await _memberService.UpdateMember(new Member
+            {
+                Id = id,
+                Name = member.Name,
+                Mail = member.Mail,
+                Active = member.Active,
+                DateOfBirth = member.DateOfBirth,
+                FirstRegistered = member.FirstRegistered
+            }));
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> DeleteMember([FromRoute] int id)
+        {
+            _logger.LogDebug($"Deleting member ID={id}.");
+
+            return Ok(await _memberService.DeleteMember(id));
         }
 
         private static MemberResponse MapToResponse(Member member)
