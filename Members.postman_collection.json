@@ -25,7 +25,7 @@
 			"response": []
 		},
 		{
-			"name": "Get Specific Member",
+			"name": "Get Member",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -67,6 +67,55 @@
 					"port": "5000",
 					"path": [
 						"members"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Member",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Torben\",\r\n    \"mail\": \"t@h.com\",\r\n    \"active\": true,\r\n    \"dateOfBirth\": \"1964-10-18T00:00:00\",\r\n    \"FirstRegistered\": \"2001-11-03T00:00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/members/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"members",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Member",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/members/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"members",
+						"1"
 					]
 				}
 			},
