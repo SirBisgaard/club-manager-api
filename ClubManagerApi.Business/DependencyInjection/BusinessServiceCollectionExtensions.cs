@@ -11,6 +11,7 @@ namespace ClubManagerApi.Business.DependencyInjection
             services.AddDataAccessDependencies();
 
             services.AddScoped<IMemberService, MemberService>();
+            services.AddScoped<IUserService, UserService>();
 
             return services;
         }

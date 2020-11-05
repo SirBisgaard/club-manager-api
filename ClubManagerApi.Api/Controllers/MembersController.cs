@@ -57,14 +57,14 @@ namespace ClubManagerApi.Api.Controllers
         {
             _logger.LogDebug($"Creating new Member.");
 
-            return Ok(await _memberService.CreateMember(new Member
+            return Ok(MapToResponse(await _memberService.CreateMember(new Member
             {
                 Name = member.Name,
                 Mail = member.Mail,
                 Active = member.Active,
                 DateOfBirth = member.DateOfBirth,
                 FirstRegistered = member.FirstRegistered
-            }));
+            })));
         }
 
         [HttpPut]
@@ -73,7 +73,7 @@ namespace ClubManagerApi.Api.Controllers
         {
             _logger.LogDebug($"Updating Member Id={id}.");
 
-            return Ok(await _memberService.UpdateMember(new Member
+            return Ok(MapToResponse(await _memberService.UpdateMember(new Member
             {
                 Id = id,
                 Name = member.Name,
@@ -81,7 +81,7 @@ namespace ClubManagerApi.Api.Controllers
                 Active = member.Active,
                 DateOfBirth = member.DateOfBirth,
                 FirstRegistered = member.FirstRegistered
-            }));
+            })));
         }
 
         [HttpDelete]

@@ -27,7 +27,8 @@ namespace ClubManagerApi.DataAccess
             return await _connection.QueryAsync<Member>(@"
                 SELECT 
                     * 
-                FROM Members");
+                FROM Members
+                WHERE Deleted IS NULL");
         }
 
         public async Task<Member> GetMember(int id)
@@ -38,7 +39,7 @@ namespace ClubManagerApi.DataAccess
                 SELECT 
                     * 
                 FROM Members 
-                WHERE ID = @id",
+                WHERE ID = @id AND Deleted IS NULL",
                 new { id });
         }
 
@@ -52,13 +53,15 @@ namespace ClubManagerApi.DataAccess
                     Mail, 
                     Active, 
                     DateOfBirth, 
-                    FirstRegistered) 
+                    FirstRegistered,
+                    Created) 
                 VALUES 
                     (@Name, 
                     @Mail, 
                     @Active, 
                     @DateOfBirth, 
-                    @FirstRegistered);
+                    @FirstRegistered,
+                    DATETIME('now'));
                 SELECT last_insert_rowid()",
                 member)).First();
 
@@ -76,7 +79,8 @@ namespace ClubManagerApi.DataAccess
                     Mail = @Mail, 
                     Active = @Active, 
                     DateOfBirth = @DateOfBirth, 
-                    FirstRegistered = @FirstRegistered",
+                    FirstRegistered = @FirstRegistered
+                WHERE Id = @Id",
                 member);
 
             return member;
@@ -87,7 +91,9 @@ namespace ClubManagerApi.DataAccess
             _logger.LogDebug($"Member is deleted.");
 
             await _connection.ExecuteAsync(@"
-                DELETE FROM Members 
+                UPDATE Members 
+                SET 
+                    Deleted = DATETIME('now')
                 WHERE Id = @id",
                 new { id });
 

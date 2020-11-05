@@ -16,16 +16,27 @@ namespace ClubManagerApi.DataAccess
 
         private void InitDatabase()
         {
-            _connection.Execute(
-                @"create table if not exists Members
+            _connection.Execute(@"
+                CREATE TABLE IF NOT EXISTS Members
                 (
-                    ID                                  integer primary key AUTOINCREMENT,
-                    Name                                varchar(100) not null,
-                    Mail                                varchar(100) not null,
-                    Active                              bit not null,
-                    DateOfBirth                         datetime not null,
-                    FirstRegistered                     datetime not null
-                )");
+                    ID                                  INTEGER PRIMARY KEY AUTOINCREMENT,
+                    Name                                VARCHAR(100) NOT NULL,
+                    Mail                                VARCHAR(100) NOT NULL,
+                    Active                              BIT NOT NULL,
+                    DateOfBirth                         DATETIME NOT NULL,
+                    FirstRegistered                     DATETIME NOT NULL,
+                    Created                             DATETIME NOT NULL,
+                    Deleted                             DATETIME NULL
+                );
+                CREATE TABLE IF NOT EXISTS Users
+                (
+                    ID                                  INTEGER PRIMARY KEY AUTOINCREMENT,
+                    Name                                VARCHAR(100) NOT NULL,
+                    Mail                                VARCHAR(100) NOT NULL,
+                    Password                            VARCHAR(32) NOT NULL,
+                    Created                             DATETIME NOT NULL,
+                    Deleted                             DATETIME NULL
+                );");
         }
 
         public void Dispose()

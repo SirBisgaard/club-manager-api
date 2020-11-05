@@ -18,6 +18,7 @@ namespace ClubManagerApi.DataAccess.DependencyInjection
                 return connection;
             });
 
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IMemberRepository, MemberRepository>();
 
             return services;
