@@ -64,6 +64,7 @@ namespace ClubManagerApi.Api.Controllers
             {
                 Name = member.Name,
                 Mail = member.Mail,
+                Phone = member.Phone,
                 Password = member.Password,
                 Active = member.Active,
                 DateOfBirth = member.DateOfBirth,
@@ -83,6 +84,7 @@ namespace ClubManagerApi.Api.Controllers
                 Id = id,
                 Name = member.Name,
                 Mail = member.Mail,
+                Phone = member.Phone,
                 Active = member.Active,
                 DateOfBirth = member.DateOfBirth,
                 FirstRegistered = member.FirstRegistered
@@ -106,6 +108,7 @@ namespace ClubManagerApi.Api.Controllers
                 Id = member.Id,
                 Name = member.Name,
                 Mail = member.Mail,
+                Phone = member.Phone,
                 Active = member.Active,
                 DateOfBirth = member.DateOfBirth,
                 FirstRegistered = member.FirstRegistered

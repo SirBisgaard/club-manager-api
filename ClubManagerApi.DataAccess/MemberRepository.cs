@@ -51,6 +51,7 @@ namespace ClubManagerApi.DataAccess
                 INSERT INTO Members 
                     (Name, 
                     Mail,  
+                    Phone,  
                     Password, 
                     Active, 
                     DateOfBirth, 
@@ -59,6 +60,7 @@ namespace ClubManagerApi.DataAccess
                 VALUES 
                     (@Name, 
                     @Mail, 
+                    @Phone, 
                     @Password, 
                     @Active, 
                     @DateOfBirth, 
@@ -79,6 +81,7 @@ namespace ClubManagerApi.DataAccess
                 SET 
                     Name = @Name, 
                     Mail = @Mail, 
+                    Phone = @Phone, 
                     Active = @Active, 
                     DateOfBirth = @DateOfBirth, 
                     FirstRegistered = @FirstRegistered
