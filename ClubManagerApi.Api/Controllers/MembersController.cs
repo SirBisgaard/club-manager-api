@@ -46,7 +46,7 @@ namespace ClubManagerApi.Api.Controllers
 
             if (member == null)
             {
-                _logger.LogDebug($"Did not find memeber with Id: {id}.");
+                _logger.LogDebug($"Did not find member with Id: {id}.");
 
                 return NotFound();
             }
