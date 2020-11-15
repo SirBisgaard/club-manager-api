@@ -25,6 +25,7 @@ namespace ClubManagerApi.Api.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<UserResponse>), 200)]
         public async Task<IActionResult> GetAllUsers()
         {
             _logger.LogDebug("Getting all users.");
@@ -36,6 +37,7 @@ namespace ClubManagerApi.Api.Controllers
 
         [HttpGet]
         [Route("{id}")]
+        [ProducesResponseType(typeof(UserResponse), 200)]
         public async Task<IActionResult> GetUser([FromRoute] int id)
         {
             _logger.LogDebug($"Getting user with Id: {id}.");
@@ -53,6 +55,7 @@ namespace ClubManagerApi.Api.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(typeof(UserResponse), 200)]
         public async Task<IActionResult> CreateUser([FromBody] CreateUserRequest user)
         {
             _logger.LogDebug($"Creating new User.");
@@ -67,6 +70,7 @@ namespace ClubManagerApi.Api.Controllers
 
         [HttpPut]
         [Route("{id}")]
+        [ProducesResponseType(typeof(UserResponse), 200)]
         public async Task<IActionResult> UpdateUser([FromRoute] int id, [FromBody] UpdateUserRequest user)
         {
             _logger.LogDebug($"Updating User Id={id}.");
@@ -81,6 +85,7 @@ namespace ClubManagerApi.Api.Controllers
 
         [HttpDelete]
         [Route("{id}")]
+        [ProducesResponseType(typeof(bool), 200)]
         public async Task<IActionResult> DeleteUser([FromRoute] int id)
         {
             _logger.LogDebug($"Deleting user ID={id}.");

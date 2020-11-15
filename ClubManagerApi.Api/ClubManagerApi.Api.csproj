@@ -5,6 +5,10 @@
     <ProjectReference Include="..\ClubManagerApi.Business\ClubManagerApi.Business.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>ClubManagerApi.Api</RootNamespace>

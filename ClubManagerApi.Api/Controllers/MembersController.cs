@@ -25,6 +25,7 @@ namespace ClubManagerApi.Api.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<MemberResponse>), 200)]
         public async Task<IActionResult> GetAllMembers()
         {
             _logger.LogDebug("Getting all members.");
@@ -36,6 +37,7 @@ namespace ClubManagerApi.Api.Controllers
 
         [HttpGet]
         [Route("{id}")]
+        [ProducesResponseType(typeof(MemberResponse), 200)]
         public async Task<IActionResult> GetMember([FromRoute] int id)
         {
             _logger.LogDebug($"Getting member with Id: {id}.");
@@ -53,6 +55,7 @@ namespace ClubManagerApi.Api.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(typeof(MemberResponse), 200)]
         public async Task<IActionResult> CreateMember([FromBody] CreateMemberRequest member)
         {
             _logger.LogDebug($"Creating new Member.");
@@ -70,6 +73,7 @@ namespace ClubManagerApi.Api.Controllers
 
         [HttpPut]
         [Route("{id}")]
+        [ProducesResponseType(typeof(MemberResponse), 200)]
         public async Task<IActionResult> UpdateMember([FromRoute] int id, [FromBody] UpdateMemberRequest member)
         {
             _logger.LogDebug($"Updating Member Id={id}.");
@@ -87,6 +91,7 @@ namespace ClubManagerApi.Api.Controllers
 
         [HttpDelete]
         [Route("{id}")]
+        [ProducesResponseType(typeof(bool), 200)]
         public async Task<IActionResult> DeleteMember([FromRoute] int id)
         {
             _logger.LogDebug($"Deleting member ID={id}.");
