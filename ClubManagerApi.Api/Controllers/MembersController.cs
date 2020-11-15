@@ -61,6 +61,7 @@ namespace ClubManagerApi.Api.Controllers
             {
                 Name = member.Name,
                 Mail = member.Mail,
+                Password = member.Password,
                 Active = member.Active,
                 DateOfBirth = member.DateOfBirth,
                 FirstRegistered = member.FirstRegistered

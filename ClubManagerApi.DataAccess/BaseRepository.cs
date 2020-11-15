@@ -22,6 +22,7 @@ namespace ClubManagerApi.DataAccess
                     ID                                  INTEGER PRIMARY KEY AUTOINCREMENT,
                     Name                                VARCHAR(100) NOT NULL,
                     Mail                                VARCHAR(100) NOT NULL,
+                    Password                            VARCHAR(32) NOT NULL,
                     Active                              BIT NOT NULL,
                     DateOfBirth                         DATETIME NOT NULL,
                     FirstRegistered                     DATETIME NOT NULL,

@@ -21,6 +21,8 @@ namespace ClubManagerApi.Business
 
         public async Task<Member> CreateMember(Member member)
         {
+            _logger.LogDebug("Creating a new member.");
+
             return await _memberRepository.CreateMember(member);
         }
 

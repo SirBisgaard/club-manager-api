@@ -50,7 +50,8 @@ namespace ClubManagerApi.DataAccess
             member.Id = (await _connection.QueryAsync<int>(@"
                 INSERT INTO Members 
                     (Name, 
-                    Mail, 
+                    Mail,  
+                    Password, 
                     Active, 
                     DateOfBirth, 
                     FirstRegistered,
@@ -58,6 +59,7 @@ namespace ClubManagerApi.DataAccess
                 VALUES 
                     (@Name, 
                     @Mail, 
+                    @Password, 
                     @Active, 
                     @DateOfBirth, 
                     @FirstRegistered,
